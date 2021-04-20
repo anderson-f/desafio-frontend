@@ -1,13 +1,14 @@
-import { Container } from 'react-bootstrap'
-import Header from './components/Header'
-import SearchBar from './components/SearchBar'
-import './global.css'
+import { Container } from "react-bootstrap";
+import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
+import "./global.css";
+
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
       <Container>
-        <SearchBar/>
+        <SearchBar />
       </Container>
     </>
   );
