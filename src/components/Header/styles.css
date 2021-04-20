@@ -1,0 +1,27 @@
+.header__container {
+  height: 100px;
+  background: #1e2531;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.header__content--main {
+  margin: 0 auto;
+  max-width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.header__span--menu{
+  color: #fff;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.header__span--menu:hover {
+  border-bottom: 2px solid #2B6CB0;
+}
