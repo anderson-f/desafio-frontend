@@ -5,19 +5,18 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { mockApi } from '../../services/api';
 
-function gifViewModal(props) {
+function gifEditModal(props) {
   const { show, handleClose, gifView } = props;
   const [loading, setLoading] = useState(false);
-  console.log('gif view', gifView);
-  async function handleClick() {
+  async function handleClickEdit() {
     try {
       setLoading(true);
       const data = {
-        name: gifView.tittle,
-        url: gifView.images.fixed_height_small.url,
+        name: gifView.name,
+        url: gifView.url,
       };
-      await mockApi.post('gifs', data).then(() => {
-        toast.success('Gif salvo!', {
+      await mockApi.put(`gifs/${gifView.id}`, {}).then(() => {
+        toast.success('Gif editado!', {
           position: 'top-center',
           autoClose: 2000,
           hideProgressBar: true,
@@ -43,18 +42,15 @@ function gifViewModal(props) {
     }
   }
   return (
-    <Modal size="sm" show={show} onHide={handleClose}>
-      <Modal.Header closeButton>Visualizar Gif</Modal.Header>
-      <Modal.Body className="gifView__modal--body">
+    <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal.Header closeButton>Editar Gif</Modal.Header>
+      <Modal.Body className="gifEdit__modal--body">
         {' '}
         <img
-          className="gifView__img--show"
+          className="gifEdit__img--show"
           alt="gif"
-          src={
-            gifView.images &&
-            gifView.images.fixed_height_small &&
-            gifView.images.fixed_height_small.url
-          }
+          src={gifView.url}
+          key={gifView.id}
         />
         {loading ? (
           <Spinner
@@ -64,11 +60,11 @@ function gifViewModal(props) {
           />
         ) : (
           <button
-            className="gifView__button--save"
-            onClick={handleClick}
+            className="gifEdit__button--save"
+            onClick={handleClickEdit}
             type="button"
           >
-            Salvar gif
+            Salvar
           </button>
         )}
       </Modal.Body>
@@ -76,4 +72,4 @@ function gifViewModal(props) {
   );
 }
 
-export default gifViewModal;
+export default gifEditModal;

@@ -9,3 +9,51 @@
 .modal-header {
   color: #fff !important;
 }
+
+.gifsSaved_row--container {
+  height: 300px;
+}
+
+.gifsSaved_col--content {
+  display: flex;
+  justify-content: center;
+}
+
+.gifsSaved__img--list {
+  width: 300px;
+  height: 300px;
+  padding: 10px;
+}
+
+.gifsSaved_col--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.gifsSaved__button {
+  height: 50px;
+  width: 100px;
+  color: #CBD5E0;
+  border: 0;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: 0;
+  margin-top: 10px;
+  transition: filter 0.2s;
+}
+
+.gifsSaved__button--edit {
+  background: #2d7536;
+}
+
+.gifsSaved__button--delete {
+  background: #a01010;
+}
+
+
+.gifView__button {
+  filter:brightness(0.9);
+}

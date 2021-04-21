@@ -9,16 +9,16 @@ import GifViewModal from '../GifViewModal';
 
 function GifsList(props) {
   const { gifsList, loadMore } = props;
-  const [showGif, setShowGif] = useState(false);
+  const [showGifModal, setShowGifModal] = useState(false);
   const [gifView, setGifView] = useState({});
   // ={!(gifsList.length > 50)}
 
   function handleCloseGifModal() {
-    setShowGif(false);
+    setShowGifModal(false);
   }
 
   function handleOpenGifModal(gif) {
-    setShowGif(true);
+    setShowGifModal(true);
     setGifView(gif);
   }
   return (
@@ -60,7 +60,7 @@ function GifsList(props) {
       </InfiniteScroll>
       <GifViewModal
         gifView={gifView}
-        show={showGif}
+        show={showGifModal}
         handleClose={handleCloseGifModal}
       />
     </div>
