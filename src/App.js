@@ -1,9 +1,11 @@
 import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import GifsList from './components/GifsList';
 import './global.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { gifApi } from './services/api';
 
 function App() {
@@ -31,7 +33,15 @@ function App() {
             }
           });
       } catch (error) {
-        console.log(error);
+        toast.error('Erro listar!', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } finally {
         //
       }
@@ -59,7 +69,15 @@ function App() {
             }
           });
       } catch (error) {
-        console.log(error);
+        toast.error('Erro na busca!', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } finally {
         //
       }
@@ -74,6 +92,7 @@ function App() {
   }
   return (
     <>
+      <ToastContainer />
       <Header />
       <Container>
         <SearchBar handleFieldChange={handleFieldChange} />

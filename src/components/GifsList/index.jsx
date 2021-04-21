@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-undef */
 import './styles.css';
+import { Spinner } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useState } from 'react';
 import GifViewModal from '../GifViewModal';
@@ -31,7 +32,11 @@ function GifsList(props) {
         dataLength={gifsList.length} // This is important field to render the next data
         next={loadMore}
         hasMore={!(gifsList.length > 4999)}
-        loader={<h4>Loading...</h4>}
+        loader={
+          <h4>
+            <Spinner animation="grow" variant="light" />
+          </h4>
+        }
         endMessage={
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>

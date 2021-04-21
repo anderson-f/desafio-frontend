@@ -1,10 +1,45 @@
 import './styles.css';
-import { Modal } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
+import { useState } from 'react';
+
+import { toast } from 'react-toastify';
+import { mockApi } from '../../services/api';
 
 function gifViewModal(props) {
   const { show, handleClose, gifView } = props;
-  function handleClick() {
-    console.log('dentro do click', gifView);
+  const [loading, setLoading] = useState(false);
+  async function handleClick() {
+    try {
+      setLoading(true);
+      const data = {
+        name: gifView.tittle,
+        url: gifView.images.fixed_height_small.url,
+      };
+      await mockApi.post('gifs', data).then(() => {
+        toast.success('Gif salvo!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        handleClose();
+      });
+    } catch (error) {
+      toast.error('Erro ao salvar!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <Modal size="sm" show={show} onHide={handleClose}>
@@ -20,13 +55,21 @@ function gifViewModal(props) {
             gifView.images.fixed_height_small.url
           }
         />
-        <button
-          className="gifView__button--save"
-          onClick={handleClick}
-          type="button"
-        >
-          Salvar gif
-        </button>
+        {loading ? (
+          <Spinner
+            style={{ height: '35px', width: '35px', marginTop: '10px' }}
+            animation="grow"
+            variant="light"
+          />
+        ) : (
+          <button
+            className="gifView__button--save"
+            onClick={handleClick}
+            type="button"
+          >
+            Salvar gif
+          </button>
+        )}
       </Modal.Body>
     </Modal>
   );

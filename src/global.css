@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roboto;
 }
 
 html {
@@ -41,4 +42,9 @@ textarea:focus, input:focus, select:focus {
   box-shadow: 0 0 0 0;
   border: 0 none;
   outline: 0;
+}
+
+@font-face {
+  font-family: starWarsFont;
+  src: url('./assets/fonts/Starjedi.ttf');
 }
