@@ -1,5 +1,5 @@
-import "./styles.css";
-import { Modal } from "react-bootstrap";
+import './styles.css';
+import { Modal } from 'react-bootstrap';
 
 function GifsSavedsModal(props) {
   const { show, handleClose } = props;

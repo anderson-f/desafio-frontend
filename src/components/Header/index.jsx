@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import "./styles.css";
-import { useState } from "react";
-import GifsSavedsModal from "../GifsSavedsModal";
+import './styles.css';
+import { useState } from 'react';
+import GifsSavedsModal from '../GifsSavedsModal';
 
 function Header() {
   const [showGifsSaveds, setShowGifsSaveds] = useState(false);

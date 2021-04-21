@@ -1,0 +1,11 @@
+.gifsList__img--list {
+  width: 300px;
+  height: 300px;
+}
+
+.gifsList__div--container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1126px;
+  overflow-y: auto;
+}
