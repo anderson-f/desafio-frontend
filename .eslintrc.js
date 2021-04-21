@@ -28,5 +28,6 @@ module.exports = {
     'click-events-have-key-events': 'off',
     'no-static-element-interactions': 'off',
     'no-unused-vars': 'off',
+    'no-console': 'off',
   },
 };

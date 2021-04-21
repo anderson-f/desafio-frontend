@@ -1,6 +1,6 @@
 .gifView__img--show{
   margin: 0 auto;
-  width: 300px;
+  width: 266px;
   height: 300px;
 }
 
@@ -8,4 +8,21 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.gifView__button--save{
+  height: 50px;
+  width: 100px;
+  background: #4A5568;
+  color: #CBD5E0;
+  border: 0;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: 0;
+  margin-top: 10px;
+  transition: filter 0.2s;
+}
+
+.gifView__button--save:hover {
+  filter:brightness(0.9);
 }

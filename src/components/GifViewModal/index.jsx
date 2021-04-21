@@ -3,12 +3,11 @@ import { Modal } from 'react-bootstrap';
 
 function gifViewModal(props) {
   const { show, handleClose, gifView } = props;
-  console.log('view modal', gifView);
   function handleClick() {
     console.log('dentro do click', gifView);
   }
   return (
-    <Modal size="lg" show={show} onHide={handleClose}>
+    <Modal size="sm" show={show} onHide={handleClose}>
       <Modal.Header closeButton>Visualizar Gif</Modal.Header>
       <Modal.Body className="gifView__modal--body">
         {' '}
@@ -21,7 +20,11 @@ function gifViewModal(props) {
             gifView.images.fixed_height_small.url
           }
         />
-        <button onClick={handleClick} type="button">
+        <button
+          className="gifView__button--save"
+          onClick={handleClick}
+          type="button"
+        >
           Salvar gif
         </button>
       </Modal.Body>
