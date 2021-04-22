@@ -8,29 +8,23 @@ const mockApiClone = new MockAdapter(mockApi);
 
 const gifView = {
   id: 1,
-  title: 'Run Away Climate Change GIF by GIPHY Studios Originals',
+  tittle: 'Gif mocked test',
   images: {
     fixed_height_small: {
-      height: '100',
-      width: '100',
-      size: '32072',
-      url:
-        'https://media4.giphy.com/media/l0HlMURBbyUqF0XQI/100.gif?cid=ccd30818n7zdsu2qjdwn7p4zgiwb4xpyrv2ncv3rx9iq1zrx&rid=100.gif&ct=g',
-      mp4_size: '13568',
-      mp4:
-        'https://media4.giphy.com/media/l0HlMURBbyUqF0XQI/100.mp4?cid=ccd30818n7zdsu2qjdwn7p4zgiwb4xpyrv2ncv3rx9iq1zrx&rid=100.mp4&ct=g',
-      webp_size: '19604',
-      webp:
-        'https://media4.giphy.com/media/l0HlMURBbyUqF0XQI/100.webp?cid=ccd30818n7zdsu2qjdwn7p4zgiwb4xpyrv2ncv3rx9iq1zrx&rid=100.webp&ct=g',
+      url: 'www.example.com',
     },
   },
 };
 
+const data = {
+  name: 'Gif mocked test',
+  url: 'www.example.com',
+};
 const closeModal = jest.fn();
 
 describe('GifViewModal component', () => {
   it('should be able to show one gif', async () => {
-    const { getByAltText, debug } = render(
+    const { getByAltText } = render(
       <GifViewModal gifView={gifView} show handleClose={closeModal} />,
     );
 
@@ -39,10 +33,8 @@ describe('GifViewModal component', () => {
   });
 
   it('should be able to save a gif', async () => {
-    const teste = mockApiClone.onPost('gifs').reply(200, {
-      name: 'Run Away Climate Change GIF by GIPHY Studios Originals',
-    });
-    const { getByText, result } = render(
+    mockApiClone.onPost('gifs').reply(200, data);
+    const { getByText } = render(
       <GifViewModal gifView={gifView} show handleClose={closeModal} />,
     );
 
@@ -50,11 +42,11 @@ describe('GifViewModal component', () => {
 
     await fireEvent.click(buttonElement);
 
-    // expect(mockApiClone.axiosInstance.post).toHaveBeenCalled();
     await waitFor(() => {
-      // expect(result.name).toEqual(
-      //   'Run Away Climate Change GIF by GIPHY Studios Originals',
-      // );
+      expect(mockApiClone.history.post.length).toBe(1);
+      expect(mockApiClone.history.post[0].data).toBe(JSON.stringify(data));
+      expect(closeModal).toHaveBeenCalled();
+      mockApiClone.resetHistory();
     });
   });
 });

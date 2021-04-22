@@ -22,7 +22,7 @@ function GifsList(props) {
     setGifView(gif);
   }
   return (
-    <div className="gifsList__div--container" data-testid="list-container">
+    <div className="gifsList__div--container">
       <InfiniteScroll
         style={{
           maxWidth: '900px',
@@ -39,7 +39,7 @@ function GifsList(props) {
         }
         endMessage={
           <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
+            <b>A aliança já tem o suficiente para acabar com lorde Vader</b>
           </p>
         }
       >

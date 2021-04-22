@@ -86,14 +86,13 @@ function GifsSavedsModal(props) {
             {' '}
             {gifs.length > 0 &&
               gifs.map(gif => (
-                <Row className="gifsSaved_row--container">
+                <Row key={gif.id} className="gifsSaved_row--container">
                   <Col className="gifsSaved_col--content">
                     {' '}
                     <img
                       className="gifsSaved__img--list"
-                      alt="gif"
+                      alt="gifs saved"
                       src={gif.url}
-                      key={gif.id}
                     />
                   </Col>
                   <Col className="gifsSaved_col--button">

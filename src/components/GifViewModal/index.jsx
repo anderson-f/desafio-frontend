@@ -26,7 +26,6 @@ function gifViewModal(props) {
           progress: undefined,
         });
         handleClose();
-        return response.data;
       });
     } catch (error) {
       toast.error('Erro ao salvar!', {

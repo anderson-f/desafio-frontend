@@ -47,13 +47,12 @@ const callNext = jest.fn();
 
 describe('GifsList component', () => {
   it('should be able to list gifs', async () => {
-    const { getAllByAltText, debug } = render(
+    const { getAllByAltText } = render(
       <GifsList gifsList={gifsList} loadMore={() => callNext()} />,
     );
 
     const imgElement = getAllByAltText('gif');
     expect(imgElement).toHaveLength(gifsList.length);
-    // debug();
   });
 
   it('should be able to list more gifs', async () => {
@@ -65,12 +64,11 @@ describe('GifsList component', () => {
   });
 
   // it('should be able to open modal GifViewModal', async () => {
-  //   const { getAllByAltText } = render(
+  //   const { getByTestId } = render(
   //     <GifsList gifsList={gifsList} loadMore={() => callNext()} />,
   //   );
 
-  //   await fireEvent.click();
-
-  //   expect(callNext).toHaveBeenCalled();
+  //   const gifviewModal = getByTestId('gif-view-modal');
+  //   expect(gifviewModal).not.toBeInTheDocument();
   // });
 });
