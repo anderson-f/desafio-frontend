@@ -6,7 +6,11 @@ function SearchBar(props) {
   return (
     <div className="searchBar__container">
       <div className="searchBar__content--bar">
-        <input onChange={handleFieldChange} className="searchBar__input--bar" />
+        <input
+          onChange={handleFieldChange}
+          className="searchBar__input--bar"
+          placeholder="Pesquisar"
+        />
         <button type="button" className="searchBar__button--bar">
           <AiOutlineSearch />
         </button>

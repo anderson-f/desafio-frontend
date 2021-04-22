@@ -8,7 +8,6 @@ import { mockApi } from '../../services/api';
 function gifViewModal(props) {
   const { show, handleClose, gifView } = props;
   const [loading, setLoading] = useState(false);
-  console.log('gif view', gifView);
   async function handleClick() {
     try {
       setLoading(true);
@@ -16,7 +15,7 @@ function gifViewModal(props) {
         name: gifView.tittle,
         url: gifView.images.fixed_height_small.url,
       };
-      await mockApi.post('gifs', data).then(() => {
+      await mockApi.post('gifs', data).then(response => {
         toast.success('Gif salvo!', {
           position: 'top-center',
           autoClose: 2000,
@@ -27,6 +26,7 @@ function gifViewModal(props) {
           progress: undefined,
         });
         handleClose();
+        return response.data;
       });
     } catch (error) {
       toast.error('Erro ao salvar!', {

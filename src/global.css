@@ -43,8 +43,3 @@ textarea:focus, input:focus, select:focus {
   border: 0 none;
   outline: 0;
 }
-
-@font-face {
-  font-family: starWarsFont;
-  src: url('./assets/fonts/Starjedi.ttf');
-}

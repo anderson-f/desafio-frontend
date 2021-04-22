@@ -11,7 +11,7 @@
 }
 
 .gifsSaved_row--container {
-  height: 300px;
+  min-height: 300px;
 }
 
 .gifsSaved_col--content {

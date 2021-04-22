@@ -1,5 +1,5 @@
 import './styles.css';
-import { Modal, Col, Row } from 'react-bootstrap';
+import { Modal, Col, Row, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
@@ -12,6 +12,8 @@ function GifsSavedsModal(props) {
   const [reloadGifs, setRealodGifs] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [gifView, setGifView] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [gifSelected, setGifSelected] = useState(0);
   useEffect(() => {
     const getGif = async () => {
       try {
@@ -34,9 +36,9 @@ function GifsSavedsModal(props) {
     };
     getGif();
   }, [reloadGifs]);
-  const [loading, setLoading] = useState(false);
 
   async function handleDelete(gif) {
+    setGifSelected(gif.id);
     try {
       setLoading(true);
       await mockApi.delete(`gifs/${gif.id}`).then(() => {
@@ -73,67 +75,71 @@ function GifsSavedsModal(props) {
   function handleOpenEditModal(gif) {
     setShowEditModal(true);
     setGifView(gif);
-    try {
-      setLoading(true);
-      setRealodGifs(!reloadGifs);
-      console.log('editar', gif);
-    } catch (error) {
-      toast.error('Erro ao editar!', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } finally {
-      setLoading(false);
-    }
   }
 
   return (
-    <Modal size="lg" show={show} onHide={handleClose}>
-      <Modal.Header closeButton>Gifs Salvos</Modal.Header>
-      <Modal.Body>
-        {' '}
-        {gifs.length > 0 &&
-          gifs.map(gif => (
-            <Row className="gifsSaved_row--container">
-              <Col className="gifsSaved_col--content">
-                {' '}
-                <img
-                  className="gifsSaved__img--list"
-                  alt="gif"
-                  src={gif.url}
-                  key={gif.id}
-                />
-              </Col>
-              <Col className="gifsSaved_col--button">
-                <button
-                  type="button"
-                  className="gifsSaved__button gifsSaved__button--edit"
-                  onClick={() => handleOpenEditModal(gif)}
-                >
-                  Editar <AiOutlineEdit />
-                </button>
-                <button
-                  type="button"
-                  className="gifsSaved__button gifsSaved__button--delete"
-                  onClick={() => handleDelete(gif)}
-                >
-                  Deletar <AiOutlineDelete />
-                </button>
-              </Col>
-            </Row>
-          ))}
-      </Modal.Body>
+    <>
+      {!showEditModal && (
+        <Modal size="lg" show={show} onHide={handleClose}>
+          <Modal.Header closeButton>Gifs Salvos</Modal.Header>
+          <Modal.Body>
+            {' '}
+            {gifs.length > 0 &&
+              gifs.map(gif => (
+                <Row className="gifsSaved_row--container">
+                  <Col className="gifsSaved_col--content">
+                    {' '}
+                    <img
+                      className="gifsSaved__img--list"
+                      alt="gif"
+                      src={gif.url}
+                      key={gif.id}
+                    />
+                  </Col>
+                  <Col className="gifsSaved_col--button">
+                    {loading && gifSelected === gif.id ? (
+                      <Spinner
+                        style={{
+                          height: '35px',
+                          width: '35px',
+                          marginTop: '10px',
+                        }}
+                        animation="grow"
+                        variant="light"
+                      />
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          className="gifsSaved__button gifsSaved__button--edit"
+                          onClick={() => handleOpenEditModal(gif)}
+                        >
+                          Editar <AiOutlineEdit />
+                        </button>
+                        <button
+                          type="button"
+                          className="gifsSaved__button gifsSaved__button--delete"
+                          onClick={() => handleDelete(gif)}
+                        >
+                          Deletar <AiOutlineDelete />
+                        </button>
+                      </>
+                    )}
+                  </Col>
+                </Row>
+              ))}
+          </Modal.Body>
+        </Modal>
+      )}
       <GifEditModal
         gifView={gifView}
         show={showEditModal}
         handleClose={handleCloseEditModal}
+        reloadList={() => {
+          setRealodGifs(!reloadGifs);
+        }}
       />
-    </Modal>
+    </>
   );
 }
 

@@ -22,7 +22,7 @@ function GifsList(props) {
     setGifView(gif);
   }
   return (
-    <div className="gifsList__div--container">
+    <div className="gifsList__div--container" data-testid="list-container">
       <InfiniteScroll
         style={{
           maxWidth: '900px',
