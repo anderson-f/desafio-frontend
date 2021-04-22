@@ -35,7 +35,7 @@ function GifsSavedsModal(props) {
       }
     };
     getGif();
-  }, [reloadGifs]);
+  }, [reloadGifs, show]);
 
   async function handleDelete(gif) {
     setGifSelected(gif.id);
